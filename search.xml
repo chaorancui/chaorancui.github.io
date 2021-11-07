@@ -64,6 +64,9 @@
 <p><a href="https://blog.csdn.net/as480133937/article/details/100138838">Hexo-Next 主题博客个性化配置超详细，超全面(两万字)</a> </p>
 </blockquote>
 ]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
   </entry>
   <entry>
     <title>Hello World</title>
@@ -98,6 +101,10 @@
     <title>「C++ STL」迭代器</title>
     <url>/2021/11/06/%E3%80%8CC-STL%E3%80%8D%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
     <content><![CDATA[]]></content>
+      <categories>
+        <category>C++</category>
+        <category>STL</category>
+      </categories>
   </entry>
   <entry>
     <title>Git 整理</title>
@@ -116,5 +123,8 @@
 </li>
 </ol>
 ]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
   </entry>
 </search>
