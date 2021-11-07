@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>HEXO博客搭建</title>
+    <url>/2020/12/29/HEXO%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="HEXO博客搭建"><a href="#HEXO博客搭建" class="headerlink" title="HEXO博客搭建"></a>HEXO博客搭建</h1><h3 id="1-安装-Node-js-——-（JavaScript-运行时环境）-官网下载"><a href="#1-安装-Node-js-——-（JavaScript-运行时环境）-官网下载" class="headerlink" title="1. 安装 Node.js —— （JavaScript 运行时环境） | 官网下载"></a>1. 安装 Node.js —— （JavaScript 运行时环境） | <a href="https://nodejs.org/en/download/">官网下载</a></h3><p>&emsp;&emsp;会安装两个组件：Nodejs 本身， npm 包管理器</p>
+<blockquote>
+<p>Linux二进制安装 ： <a href="https://github.com/nodejs/help/wiki/Installation">安装教程</a> ,安装完成后重新login才会加载环境变量(可选择写入.bashrc)</p>
+</blockquote>
+<blockquote>
+<p>Windows二级制安装：官网下载msi文件默认安装即可，自动修改系统环境变量</p>
+</blockquote>
+<p>可以用 <code>npm -v</code> 命令查询 npm 有没有安装成功：</p>
+<h3 id="2-用-npm-安装-HEXO-hexo官网"><a href="#2-用-npm-安装-HEXO-hexo官网" class="headerlink" title="2. 用 npm 安装 HEXO | hexo官网"></a>2. 用 npm 安装 HEXO | <a href="https://hexo.io/zh-cn/">hexo官网</a></h3><blockquote>
+<p>Linux安装<br>&emsp;&emsp;npm 安装其他包需要管理员权限(Nodejs被安装到了系统目录) | <a href="https://www.npmjs.cn/getting-started/installing-npm-packages-globally/">npm命令</a></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo -s</span><br><span class="line">source ~/.profile   #变量在 ~/.profile 导出的坏处，安装前就要执行这两步</span><br><span class="line">npm install -g hexo-cli </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">也可以使用 cnpm 安装 hexo，这需要先用 npm 安装 cnpm</span></span><br><span class="line">sudo -s</span><br><span class="line">source ~/.profile</span><br><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line">cnpm install -g hexo-cli </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">或者先更换npm源解决翻墙也不能下载的情况(国外的npm源确实不稳定)</span></span><br><span class="line">sudo -s</span><br><span class="line">source ~/.profile</span><br><span class="line">npm config set registry https://registry.npm.taobao.org npm info underscore</span><br><span class="line">npm install -g hexo-cli </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Windows安装<br>&emsp;&emsp;Windows用户在开始菜单打开Node.js文件夹下的<code>Node.js command prompt</code>进行接下来的操作</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli </span><br></pre></td></tr></table></figure>
+<p>可以用 <code>hexo -v</code> 命令查询 hexo 有没有安装成功：</p>
+<h3 id="3-创建静态博客"><a href="#3-创建静态博客" class="headerlink" title="3. 创建静态博客"></a>3. 创建静态博客</h3><p>&emsp;&emsp;创建 Hexo 根目录，以 ~/blog 为例：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd</span><br><span class="line">mkdir -p blog &amp;&amp; cd blog</span><br><span class="line">hexo init   </span><br><span class="line"><span class="meta">#</span><span class="bash">或者</span></span><br><span class="line">cd</span><br><span class="line">mkdir -p blog</span><br><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
+<p>进入 Hexo 根目录，通过 <code>hexo server</code>命令启动服务器，默认的访问地址是：<a href="http://localhost:4000，然后就可以看到">http://localhost:4000，然后就可以看到</a> hexo 默认主题的页面。</p>
+<p><a href="https://hexo.io/zh-cn/docs/commands">hexo 命令</a></p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># 创建一篇新博文，即一篇名为 &quot;My New Post&quot; 的 Markdown 文档， 也是博客标题</span></span><br><span class="line">hexo new &quot;My New Post&quot;      #或者 hexo n &quot;My New Post&quot;</span><br><span class="line"></span><br><span class="line"><span class="section"># 更改主体或配置或排版不正常，先 clean，再 generate</span></span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line"><span class="section"># 生成静态博客文件</span></span><br><span class="line">hexo generate   #或者 hexo g</span><br><span class="line"></span><br><span class="line"><span class="section"># 本地预览</span></span><br><span class="line">hexo server     #或者 hexo s</span><br><span class="line"></span><br><span class="line"><span class="section"># 部署到远端(需额外配置 `<span class="emphasis">_config.yml` 文件)</span></span></span><br><span class="line"><span class="section"><span class="emphasis">hexo deploy     #或者 hexo d</span></span></span><br><span class="line"><span class="section"><span class="emphasis"></span></span></span><br></pre></td></tr></table></figure>
+<p>以将 Hexo 上传到 Github 上为例：<br>安装 Git 部署插件 deployer-git</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>在 /blog/_config.yml 中修改 deploy 属性(注意:之后有空格)</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">https://github.com/chaorancui/chaorancui.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<p>将 Repository 换成你申请的 Git 仓库地址。</p>
+<p>若 <code>hexo deploy</code> <strong>报错</strong> ERROR Deployer not found: git，则同样进行上述操作。</p>
+<h3 id="4-更换主题"><a href="#4-更换主题" class="headerlink" title="4. 更换主题"></a>4. 更换主题</h3><p>&emsp;&emsp;更换 Hexo 主题非常容易，您只要在 themes 文件夹内，新增一个任意名称的文件夹，并修改 _config.yml 内的 theme 设定(<u><strong>文件夹名和此处要对应</strong></u>)，即可切换主题。以NexT主题为例：<br>&emsp;&emsp;NexT主题<a href="https://github.com/iissnan/hexo-theme-next">老版</a>已经不再维护，请使用<a href="https://github.com/theme-next/hexo-theme-next">新版</a>。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd blog</span><br><span class="line">git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+<p>修改站点配置文件<code>_config.yml</code>，找到如下代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line">theme: landscape</span><br><span class="line">12</span><br></pre></td></tr></table></figure>
+<p>将 landscape 修改为 next 即可。</p>
+<h3 id="5-配置文件"><a href="#5-配置文件" class="headerlink" title="5. 配置文件"></a>5. 配置文件</h3><p>&emsp;&emsp;在 Hexo 中有<strong>两份</strong>主要的配置文件，其名称都是 <strong>_config.yml</strong>。 其中，一份位于<strong>站点根目录下</strong>，主要包含 Hexo 本身的站点配置；另一份位于<strong>主题目录下</strong>，这份配置由主题作者提供，主要用于配置主题相关的选项。</p>
+<p>为了描述方便，在以下说明中，将前者称为 <font color=red><code>站点配置文件</code></font>， 后者称为 <font color=red><code>主题配置文件</code></font>。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/hexo/_config.yml</span><br><span class="line">/hexo/themes/next/_config.yml</span><br></pre></td></tr></table></figure>
+<p>修改语言<br>打开站点配置文件，搜索 language，找到如下代码：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">author:</span><br><span class="line">language:</span><br><span class="line">timezone:</span><br></pre></td></tr></table></figure>
+<p>在 language 后面输入 zh-CN。</p>
+<h3 id="5-Local-Search本地搜索"><a href="#5-Local-Search本地搜索" class="headerlink" title="5. Local Search本地搜索"></a>5. Local Search本地搜索</h3><p>安装插件hexo-generator-searchdb,执行以下命令:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+<p>修改 <font color=red><code>hexo/_config.yml</code></font> <strong>站点配置文件</strong>，新增以下内容到任意位置：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">path: search.xml</span><br><span class="line">field: post</span><br><span class="line">format: html</span><br><span class="line">limit: 10000</span><br></pre></td></tr></table></figure>
+<p>编辑 <strong>主题配置文件</strong>，启用本地搜索功能：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Local search</span></span><br><span class="line">local_search:</span><br><span class="line">enable: true</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="6-增加文章字数统计及阅读时常功能"><a href="#6-增加文章字数统计及阅读时常功能" class="headerlink" title="6. 增加文章字数统计及阅读时常功能"></a>6. 增加文章字数统计及阅读时常功能</h3><p>安装插件 <font color=red><code>hexo-wordcount</code></font> ,执行以下命令:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-wordcount --save</span><br></pre></td></tr></table></figure>
+<p>修改 <font color=red><code>themes/next/_config.yml</code></font> 主题配置文件，搜索关键字 <font color=red><code>post_wordcount</code></font> ，修改如下:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">post_wordcount:</span><br><span class="line">  item_text: true</span><br><span class="line">  wordcount: true #单篇文章字数</span><br><span class="line">  min2read: true #单篇阅读时长</span><br><span class="line">  totalcount: true #站点总字数</span><br><span class="line">  separated_meta: true</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<blockquote>
+<p><a href="https://blog.csdn.net/as480133937/article/details/100138838">Hexo-Next 主题博客个性化配置超详细，超全面(两万字)</a> </p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/12/26/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>VScode编写shell插件</title>
+    <url>/2021/11/06/VScode%E7%BC%96%E5%86%99shell%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="VScode编写shell插件"><a href="#VScode编写shell插件" class="headerlink" title="VScode编写shell插件"></a>VScode编写shell插件</h1><p>编写 shell 脚本，有以下插件可以选择：</p>
+<h2 id="1-shellman-Remisa"><a href="#1-shellman-Remisa" class="headerlink" title="1. shellman - Remisa"></a>1. shellman - Remisa</h2><p>  —-智能提示和自动补全，shellman全部搞定</p>
+<p>下载后，新建test.sh文件，输入if，可见如下结果：选中提示中的第一个，然后就获得了if全家桶：</p>
+<h2 id="2-shellcheck-Timon-Wong"><a href="#2-shellcheck-Timon-Wong" class="headerlink" title="2. shellcheck - Timon Wong"></a>2. shellcheck - Timon Wong</h2><p>  —-语法错误检查</p>
+<h2 id="3-shell-format-foxundermoon"><a href="#3-shell-format-foxundermoon" class="headerlink" title="3. shell-format - foxundermoon"></a>3. shell-format - foxundermoon</h2><p>  —-格式化</p>
+<p>快捷键：Ctrl + Shift + I</p>
+<p>到这里，刀就已经磨好了，去劈柴吧少年~</p>
+<blockquote>
+<p>本文转载自：<a href="https://zhuanlan.zhihu.com/p/199187317">VScode 打造shell脚本IDE</a></p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>「C++ STL」迭代器</title>
+    <url>/2021/11/06/%E3%80%8CC-STL%E3%80%8D%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Git 整理</title>
+    <url>/2021/11/07/Git-%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<h1 id="Git-整理"><a href="#Git-整理" class="headerlink" title="Git 整理"></a>Git 整理</h1><h2 id="1-git-远程强制覆盖本地-git-本地强制覆盖远程"><a href="#1-git-远程强制覆盖本地-git-本地强制覆盖远程" class="headerlink" title="1. git 远程强制覆盖本地 / git 本地强制覆盖远程"></a>1. git 远程强制覆盖本地 / git 本地强制覆盖远程</h2><ol>
+<li><p>git 远程覆盖本地</p>
+<p><font color=red>远程分支名记得替换下</font>，一般都是在dev 或者版本号上开发。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master </span><br><span class="line">git pull   </span><br></pre></td></tr></table></figure>
+<p>git fetch 只是下载远程的库的内容，不做任何的合并 git reset 把 HEAD 指向刚刚下载的最新的版本  </p>
+</li>
+</ol>
+<ol start="2">
+<li><p>git 本地强制覆盖远程</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin master --force</span><br></pre></td></tr></table></figure>
+<p>git 本地分支强制覆盖远程 master 分支。<font color=red>远程分支名记得替换下</font>。</p>
+</li>
+</ol>
+]]></content>
+  </entry>
+</search>
