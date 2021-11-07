@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>VScode编写shell插件</title>
-    <url>/2021/11/06/VScode%E7%BC%96%E5%86%99shell%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<h1 id="VScode编写shell插件"><a href="#VScode编写shell插件" class="headerlink" title="VScode编写shell插件"></a>VScode编写shell插件</h1><p>编写 shell 脚本，有以下插件可以选择：</p>
-<h2 id="1-shellman-Remisa"><a href="#1-shellman-Remisa" class="headerlink" title="1. shellman - Remisa"></a>1. shellman - Remisa</h2><p>  —-智能提示和自动补全，shellman全部搞定</p>
-<p>下载后，新建test.sh文件，输入if，可见如下结果：选中提示中的第一个，然后就获得了if全家桶：</p>
-<h2 id="2-shellcheck-Timon-Wong"><a href="#2-shellcheck-Timon-Wong" class="headerlink" title="2. shellcheck - Timon Wong"></a>2. shellcheck - Timon Wong</h2><p>  —-语法错误检查</p>
-<h2 id="3-shell-format-foxundermoon"><a href="#3-shell-format-foxundermoon" class="headerlink" title="3. shell-format - foxundermoon"></a>3. shell-format - foxundermoon</h2><p>  —-格式化</p>
-<p>快捷键：Ctrl + Shift + I</p>
-<p>到这里，刀就已经磨好了，去劈柴吧少年~</p>
-<blockquote>
-<p>本文转载自：<a href="https://zhuanlan.zhihu.com/p/199187317">VScode 打造shell脚本IDE</a></p>
-</blockquote>
+    <title>Git 整理</title>
+    <url>/2021/11/07/Git-%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<h1 id="Git-整理"><a href="#Git-整理" class="headerlink" title="Git 整理"></a>Git 整理</h1><h2 id="1-git-远程强制覆盖本地-git-本地强制覆盖远程"><a href="#1-git-远程强制覆盖本地-git-本地强制覆盖远程" class="headerlink" title="1. git 远程强制覆盖本地 / git 本地强制覆盖远程"></a>1. git 远程强制覆盖本地 / git 本地强制覆盖远程</h2><ol>
+<li><p>git 远程覆盖本地</p>
+<p><font color=red>远程分支名记得替换下</font>，一般都是在dev 或者版本号上开发。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master </span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<p>git fetch 只是下载远程的库的内容，不做任何的合并 git reset 把 HEAD 指向刚刚下载的最新的版本  </p>
+<p>第一个是：拉取所有更新，不同步；</p>
+<p>第二个是：本地代码同步线上最新版本(会覆盖本地所有与远程仓库上同名的文件)；</p>
+<p>第三个是：再更新一次（其实也可以不用，第二步命令做过了其实）</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>git 本地强制覆盖远程</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin master --force</span><br></pre></td></tr></table></figure>
+<p>git 本地分支强制覆盖远程 master 分支。<font color=red>远程分支名记得替换下</font>。</p>
+</li>
+</ol>
 ]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
   </entry>
   <entry>
     <title>HEXO博客搭建</title>
@@ -85,6 +94,21 @@
       </categories>
   </entry>
   <entry>
+    <title>VScode编写shell插件</title>
+    <url>/2021/11/06/VScode%E7%BC%96%E5%86%99shell%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="VScode编写shell插件"><a href="#VScode编写shell插件" class="headerlink" title="VScode编写shell插件"></a>VScode编写shell插件</h1><p>编写 shell 脚本，有以下插件可以选择：</p>
+<h2 id="1-shellman-Remisa"><a href="#1-shellman-Remisa" class="headerlink" title="1. shellman - Remisa"></a>1. shellman - Remisa</h2><p>  —-智能提示和自动补全，shellman全部搞定</p>
+<p>下载后，新建test.sh文件，输入if，可见如下结果：选中提示中的第一个，然后就获得了if全家桶：</p>
+<h2 id="2-shellcheck-Timon-Wong"><a href="#2-shellcheck-Timon-Wong" class="headerlink" title="2. shellcheck - Timon Wong"></a>2. shellcheck - Timon Wong</h2><p>  —-语法错误检查</p>
+<h2 id="3-shell-format-foxundermoon"><a href="#3-shell-format-foxundermoon" class="headerlink" title="3. shell-format - foxundermoon"></a>3. shell-format - foxundermoon</h2><p>  —-格式化</p>
+<p>快捷键：Ctrl + Shift + I</p>
+<p>到这里，刀就已经磨好了，去劈柴吧少年~</p>
+<blockquote>
+<p>本文转载自：<a href="https://zhuanlan.zhihu.com/p/199187317">VScode 打造shell脚本IDE</a></p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2020/12/26/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -97,30 +121,6 @@
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>Git 整理</title>
-    <url>/2021/11/07/Git-%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<h1 id="Git-整理"><a href="#Git-整理" class="headerlink" title="Git 整理"></a>Git 整理</h1><h2 id="1-git-远程强制覆盖本地-git-本地强制覆盖远程"><a href="#1-git-远程强制覆盖本地-git-本地强制覆盖远程" class="headerlink" title="1. git 远程强制覆盖本地 / git 本地强制覆盖远程"></a>1. git 远程强制覆盖本地 / git 本地强制覆盖远程</h2><ol>
-<li><p>git 远程覆盖本地</p>
-<p><font color=red>远程分支名记得替换下</font>，一般都是在dev 或者版本号上开发。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master </span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
-<p>git fetch 只是下载远程的库的内容，不做任何的合并 git reset 把 HEAD 指向刚刚下载的最新的版本  </p>
-<p>第一个是：拉取所有更新，不同步；</p>
-<p>第二个是：本地代码同步线上最新版本(会覆盖本地所有与远程仓库上同名的文件)；</p>
-<p>第三个是：再更新一次（其实也可以不用，第二步命令做过了其实）</p>
-</li>
-</ol>
-<ol start="2">
-<li><p>git 本地强制覆盖远程</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin master --force</span><br></pre></td></tr></table></figure>
-<p>git 本地分支强制覆盖远程 master 分支。<font color=red>远程分支名记得替换下</font>。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
   </entry>
   <entry>
     <title>「C++ STL」迭代器</title>
