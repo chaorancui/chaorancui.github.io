@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -24,7 +24,7 @@
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Chaoran Cui">
 <meta name="twitter:card" content="summary">
 
@@ -37,7 +37,7 @@
     sidebar: "",
     isHome : true,
     isPost : false,
-    lang   : 'zh'
+    lang   : 'zh-CN'
   };
 </script>
 
@@ -81,7 +81,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Navigationsleiste an/ausschalten">
+    <div class="toggle" aria-label="切换导航栏">
       <span class="toggle-line toggle-line-first"></span>
       <span class="toggle-line toggle-line-middle"></span>
       <span class="toggle-line toggle-line-last"></span>
@@ -110,27 +110,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="home fa-fw"></i>Startseite</a>
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archiv</a>
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Schlagwörter</a>
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="th fa-fw"></i>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>Über</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
   </ul>
@@ -159,7 +159,78 @@
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/07/Git-%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Chaoran Cui">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/07/Git-%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Git 整理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-07 14:57:50 / 修改时间：15:19:08" itemprop="dateCreated datePublished" datetime="2021-11-07T14:57:50+08:00">2021-11-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Git-整理"><a href="#Git-整理" class="headerlink" title="Git 整理"></a>Git 整理</h1><h2 id="1-git-远程强制覆盖本地-git-本地强制覆盖远程"><a href="#1-git-远程强制覆盖本地-git-本地强制覆盖远程" class="headerlink" title="1. git 远程强制覆盖本地 / git 本地强制覆盖远程"></a>1. git 远程强制覆盖本地 / git 本地强制覆盖远程</h2><ol>
+<li><p>git 远程覆盖本地</p>
+<p><font color=red>远程分支名记得替换下</font>，一般都是在dev 或者版本号上开发。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master </span><br><span class="line">git pull   </span><br></pre></td></tr></table></figure>
+<p>git fetch 只是下载远程的库的内容，不做任何的合并 git reset 把 HEAD 指向刚刚下载的最新的版本  </p>
+</li>
+</ol>
+<ol start="2">
+<li><p>git 本地强制覆盖远程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master --force</span><br></pre></td></tr></table></figure>
+<p>git 本地分支强制覆盖远程 master 分支。<font color=red>远程分支名记得替换下</font>。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/06/VScode%E7%BC%96%E5%86%99shell%E6%8F%92%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -182,16 +253,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Veröffentlicht am</span>
+              <span class="post-meta-item-text">发表于</span>
 
-              <time title="Erstellt: 2021-11-06 22:28:19" itemprop="dateCreated datePublished" datetime="2021-11-06T22:28:19+08:00">2021-11-06</time>
+              <time title="创建时间：2021-11-06 22:28:19" itemprop="dateCreated datePublished" datetime="2021-11-06T22:28:19+08:00">2021-11-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
-                <span class="post-meta-item-text">Bearbeitet am</span>
-                <time title="Geändert am: 2021-11-07 13:37:08" itemprop="dateModified" datetime="2021-11-07T13:37:08+08:00">2021-11-07</time>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-07 13:37:08" itemprop="dateModified" datetime="2021-11-07T13:37:08+08:00">2021-11-07</time>
               </span>
 
           
@@ -233,7 +304,7 @@
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/06/%E3%80%8CC-STL%E3%80%8D%E8%BF%AD%E4%BB%A3%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -256,9 +327,9 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Veröffentlicht am</span>
+              <span class="post-meta-item-text">发表于</span>
 
-              <time title="Erstellt: 2021-11-06 22:23:35" itemprop="dateCreated datePublished" datetime="2021-11-06T22:23:35+08:00">2021-11-06</time>
+              <time title="创建时间：2021-11-06 22:23:35" itemprop="dateCreated datePublished" datetime="2021-11-06T22:23:35+08:00">2021-11-06</time>
             </span>
 
           
@@ -290,7 +361,7 @@
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/29/HEXO%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -313,10 +384,10 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Veröffentlicht am</span>
+              <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="Erstellt: 2020-12-29 10:44:57 / Geändert am: 10:45:33" itemprop="dateCreated datePublished" datetime="2020-12-29T10:44:57+08:00">2020-12-29</time>
+              <time title="创建时间：2020-12-29 10:44:57 / 修改时间：10:45:33" itemprop="dateCreated datePublished" datetime="2020-12-29T10:44:57+08:00">2020-12-29</time>
             </span>
 
           
@@ -376,7 +447,7 @@
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/26/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -399,9 +470,9 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Veröffentlicht am</span>
+              <span class="post-meta-item-text">发表于</span>
 
-              <time title="Erstellt: 2020-12-26 20:48:07" itemprop="dateCreated datePublished" datetime="2020-12-26T20:48:07+08:00">2020-12-26</time>
+              <time title="创建时间：2020-12-26 20:48:07" itemprop="dateCreated datePublished" datetime="2020-12-26T20:48:07+08:00">2020-12-26</time>
             </span>
 
           
@@ -483,10 +554,10 @@
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          Inhaltsverzeichnis
+          文章目录
         </li>
         <li class="sidebar-nav-overview">
-          Übersicht
+          站点概览
         </li>
       </ul>
 
@@ -505,8 +576,8 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
-          <span class="site-state-item-name">Artikel</span>
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
         </a>
       </div>
   </nav>
@@ -539,7 +610,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Chaoran Cui</span>
 </div>
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
         
