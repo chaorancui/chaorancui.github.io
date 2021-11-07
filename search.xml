@@ -226,23 +226,23 @@
 </thead>
 <tbody><tr>
 <td>vector</td>
-<td>随机访问(++ / – / + / - / += / -=)</td>
+<td>随机访问(++ / – / + / - / += / -= / == / !=)</td>
 </tr>
 <tr>
 <td>deque</td>
-<td>随机访问(++ / – / + / - / += / -=)</td>
+<td>随机访问(++ / – / + / - / += / -= / == / !=)</td>
 </tr>
 <tr>
 <td>list</td>
-<td>双向(++ / –)</td>
+<td>双向(++ / – / == / !=)</td>
 </tr>
 <tr>
 <td>set / multiset</td>
-<td>双向(++ / –)</td>
+<td>双向(++ / – / == / !=)</td>
 </tr>
 <tr>
 <td>map / multimap</td>
-<td>双向(++ / –)</td>
+<td>双向(++ / – / == / !=)</td>
 </tr>
 <tr>
 <td>stack</td>
