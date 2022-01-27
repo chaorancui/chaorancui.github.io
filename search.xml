@@ -3,7 +3,136 @@
   <entry>
     <title>Git 整理</title>
     <url>/2021/11/07/Git-%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<h1 id="Git-整理"><a href="#Git-整理" class="headerlink" title="Git 整理"></a>Git 整理</h1><h2 id="1-git-远程强制覆盖本地-git-本地强制覆盖远程"><a href="#1-git-远程强制覆盖本地-git-本地强制覆盖远程" class="headerlink" title="1. git 远程强制覆盖本地 / git 本地强制覆盖远程"></a>1. git 远程强制覆盖本地 / git 本地强制覆盖远程</h2><ol>
+    <content><![CDATA[<h1 id="Git-整理"><a href="#Git-整理" class="headerlink" title="Git 整理"></a>Git 整理</h1><h2 id="git-SSH-秘钥生成"><a href="#git-SSH-秘钥生成" class="headerlink" title="git SSH 秘钥生成"></a>git SSH 秘钥生成</h2><p>秘钥路径：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.ssh</span><br><span class="line">================&gt;&gt;</span><br><span class="line">authorized_keys2  id_dsa       known_hosts</span><br><span class="line">config            id_dsa.pub</span><br></pre></td></tr></table></figure>
+<p>在 git bash 中输入命令，引号中内容为邮箱：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;cuichaoran@huawei.com&quot;</span></span><br></pre></td></tr></table></figure>
+<p>该命令会在用户主目录（Windows：C:\Users\用户名\，Linux：~/）里生产 <code>.ssh</code> 文件夹，里面有 <code>id_rsa</code> 和 <code>id_rsa.pub</code> 两个文件，这两个文件就是 SSH Key 的秘钥对。其中，id_rsa 是私钥，不能泄露，id_rsa.pub 是公钥，可以告诉别人。</p>
+<p>拷贝 SSH 秘钥后要修改权限：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SSH 秘钥从 Windows 拷贝到 Linux后，文件权限会改变，导致告警，重新修改权限即可：</span><br><span class="line">chmod 600 id_rsa id_rsa.pub</span><br></pre></td></tr></table></figure>
+<p>原因是秘钥权限不能对其他用户开放，否则秘钥就会被忽略，用 SSH 访问时报如下警告，</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">Permissions 0777 for &#39;liydsshkey&#39; are too open.</span><br><span class="line">It is required that your private key files are NOT accessible by others.</span><br><span class="line">This private key will be ignored.</span><br></pre></td></tr></table></figure>
+<p>Windows下秘钥默认权限：-rw-r–r–</p>
+<blockquote>
+<p>参考资料</p>
+<p><a href="https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5">服务器上的 Git - 生成 SSH 公钥</a></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>下面的命令输入的时候不需要输入 <code>&lt;</code> 和 <code>&gt;</code></p>
+<p>在克隆远程项目的时候，本地分支会自动与远程仓库建立追踪关系，可以使用默认的 origin 来替代远程仓库名，因此上文中的 &lt;仓库关联命名&gt; 常常写成 origin。若一个本地仓库关联了多个远程仓库，则需要根据实际情况选择 &lt;仓库关联命名&gt;。</p>
+</blockquote>
+<h2 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h2><p>git clone 只能 clone 远程库的 master 分支，无法 clone 所有分支。</p>
+<h2 id="git-pull操作"><a href="#git-pull操作" class="headerlink" title="git pull操作"></a>git pull操作</h2><p>git pull 命令用于从远程获取代码并合并本地的版本。git pull 其实是 <strong>git fetch</strong> 和 <strong>git merge</strong> 的合并。</p>
+<ul>
+<li><p>将远程指定分支拉取到本地<strong>指定</strong>分支上：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull &lt;关联仓库命名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将远程指定分支拉取到本地<strong>当前</strong>分支上：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull &lt;关联仓库命名&gt; &lt;远程分支名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>将与本地当前分支<strong>同名</strong>的远程分支拉取到本地<strong>当前</strong>分支上(需先关联远程分支，方法如下)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull</span><br><span class="line"></span><br><span class="line">// 将本地分支与远程同名分支相关联</span><br><span class="line">git push --set-upstream origin &lt;本地分支名&gt;</span><br><span class="line">// 简写方式：</span><br><span class="line">git push -u origin &lt;本地分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>在克隆远程项目的时候，本地分支会自动与远程仓库建立追踪关系，可以使用默认的origin来替代远程仓库名，<br>所以，我常用的命令就是 git pull origin &lt;远程仓库名&gt;，操作简单，安全可控。</p>
+</li>
+<li><p>将远程指定分支拉取到本地<strong>指定</strong>分支上（本地不存在的分支）:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch</span><br><span class="line">git checkout -b 本地分支名 origin/远程分支名</span><br></pre></td></tr></table></figure></li>
+<li><p>远端分支<strong>强制覆盖</strong>本地分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch origin &lt;远程分支名&gt;</span><br><span class="line">git reset --hard origin/&lt;远程分支名&gt;</span><br><span class="line"><span class="comment">#  或者使用下面的命令</span></span><br><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/&lt;远程分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>git fetch 只是下载远程的库的内容，不做任何的合并 git reset 把 HEAD 指向刚刚下载的最新的版本。 还可以在执行一次 git pull，也可以不用执行。</p>
+<p>第一个是：拉取所有更新，不同步；</p>
+<p>第二个是：本地代码同步线上最新版本(会覆盖本地所有与远程仓库上同名的文件)；</p>
+</li>
+</ul>
+<h2 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a>git push</h2><ul>
+<li><p>将本地当前分支推送到远程<strong>指定</strong>分支上：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push &lt;关联仓库命名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>将本地当前分支推送到与本地当前分支<strong>同名</strong>的远程分支上（如果远程仓库没有这个分支，则会新建一个该分支）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push &lt;关联仓库命名&gt; &lt;本地分支名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>将本地当前分支推送到与本地当前分支<strong>同名</strong>的远程分支上(需先关联远程分支，方法方法如下)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push</span><br><span class="line"></span><br><span class="line">// 将本地分支与远程同名分支相关联</span><br><span class="line">git push --set-upstream origin &lt;本地分支名&gt;</span><br><span class="line">// 简写方式：</span><br><span class="line">git push -u origin &lt;本地分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>同样的，推荐使用第2种方式，git push origin &lt;远程同名分支名&gt;</p>
+</li>
+<li><p>本地<strong>强制覆盖</strong>远程</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push &lt;关联仓库命名&gt; &lt;远程分支名&gt; --force</span><br></pre></td></tr></table></figure>
+<p>如 git 本地分支强制覆盖远程 master 分支：<code>git push origin master --force</code></p>
+</li>
+</ul>
+<blockquote>
+<p>注意：pull是远程在前本地在后，push相反</p>
+</blockquote>
+<h2 id="git-remote"><a href="#git-remote" class="headerlink" title="git remote"></a>git remote</h2><ul>
+<li><p>查看已关联的远程仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure></li>
+<li><p>添加一个远程仓库（输入的时候不需要输入 <code>&lt;</code> 和 <code>&gt;</code>）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add &lt;关联仓库命名&gt; &lt;关联仓库地址&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>取消本地目录下关联的远程库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote remove &lt;关联仓库命名&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h2><ul>
+<li><p>本地分支重命名（还没有推送到远程）</p>
+<p>如果对于分支不是当前分支，可以使用下面代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -m &lt;原分支名&gt; &lt;新分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>如果是当前分支，那么可以使用加上新名字：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -m &lt;新分支名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>远程分支重命名（已经推送远程-假设本地分支和远程对应分支名称相同，且处于本地分支）</p>
+<p>a. 重命名远程分支对应的本地分支</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git branch -m &lt;原分支名&gt; &lt;新分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>b. 删除远程分支</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git push --delete origin &lt;原分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>c. 上传新命名的本地分支</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git push origin &lt;新分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>d.把修改后的本地分支与远程分支关联</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git branch --set-upstream-to origin/&lt;新分支名&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="git-commit"><a href="#git-commit" class="headerlink" title="git commit"></a>git commit</h2><blockquote>
+<p>–amend 通过创建一个新的 commit 来替换当前分支的尖端。</p>
+</blockquote>
+<p>修改 commit message，「amend：修改、修正」</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
+<p>在弹出的 vim 编辑窗口中，最上方，修改 message 后，:wq 即可。</p>
+<blockquote>
+<p>参考网址</p>
+<p><a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2">7.6 Git 工具 - 重写历史</a></p>
+</blockquote>
+<h2 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h2><p>git reset 命令用于回退版本，可以指定退回某一次提交的版本。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git reset [--soft | --mixed | --hard] [HEAD]</span><br></pre></td></tr></table></figure>
+<p><strong>–mixed</strong> 为默认，可以不用带该参数，用于重置暂存区的文件与上一次的提交(commit)保持一致，工作区文件内容保持不变。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">HEAD 说明：</span><br><span class="line">HEAD 表示当前版本</span><br><span class="line">HEAD^ 上一个版本</span><br><span class="line">HEAD^^ 上上一个版本</span><br><span class="line">HEAD^^^ 上上上一个版本</span><br><span class="line">以此类推...</span><br><span class="line"></span><br><span class="line">可以使用 ~ 数字表示</span><br><span class="line">HEAD~0 表示当前版本</span><br><span class="line">HEAD~1 上一个版本</span><br><span class="line">HEAD^2 上上一个版本</span><br><span class="line">HEAD^3 上上上一个版本</span><br><span class="line">以此类推...</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h2><p>rebase的作用简要概括为：可以对某一段线性提交历史进行编辑、删除、复制、粘贴；因此，合理使用rebase命令可以使我们的提交历史干净、简洁！</p>
+<p><strong>使用git rebase合并多次commit：</strong></p>
+<ul>
+<li><p>方法1：指名要合并的版本号区间</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git rebase -i  [startpoint]  [endpoint]</span><br></pre></td></tr></table></figure>
+<p>其中 <code>-i</code> 的意思是 <code>--interactive</code>，即弹出交互式的界面让用户编辑完成合并操作，<code>[startpoint] [endpoint]</code>则指定了一个编辑区间，如果不指定<code>[endpoint]</code>，则该区间的终点默认是当前分支 HEAD 所指向的 commit （注：该区间指定的是一个前开后闭的区间，<code>[startpoint]</code> <strong>本身不参与合并</strong>，可以把它当做一个坐标）。</p>
+</li>
+<li><p>方法2：从HEAD版本开始往过去数3个版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git rebase -i HEAD~3 </span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<p>  在弹出的 vim 编辑窗口中，会列出要合并的 commit message，提交时间最早的列在上面，最晚的在下面，由于 squash 是要和前一个 commit 合并，因此<strong>最早的一个填 pick，比较晚的几个都填 squash</strong>，然后 <code>:wq</code> 即可。</p>
+<blockquote>
+<p>指令解释（交互编辑时使用）：</p>
+<p>pick：保留该commit（缩写:p）</p>
+<p>reword：保留该commit，但我需要修改该commit的注释（缩写:r）</p>
+<p>edit：保留该commit, 但我要停下来修改该提交(不仅仅修改注释)（缩写:e）</p>
+<p>squash：将该commit和前一个commit合并（缩写:s）</p>
+<p>fixup：将该commit和前一个commit合并，但我不要保留该提交的注释信息（缩写:f）</p>
+<p>exec：执行shell命令（缩写:x）</p>
+<p>drop：我要丢弃该commit（缩写:d）</p>
+</blockquote>
+<h2 id="git-远程强制覆盖本地-git-本地强制覆盖远程"><a href="#git-远程强制覆盖本地-git-本地强制覆盖远程" class="headerlink" title="git 远程强制覆盖本地 / git 本地强制覆盖远程"></a>git 远程强制覆盖本地 / git 本地强制覆盖远程</h2><ol>
 <li><p>git 远程覆盖本地</p>
 <p><font color=red>远程分支名记得替换下</font>，一般都是在dev 或者版本号上开发。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master </span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
@@ -284,5 +413,213 @@
         <category>C++</category>
         <category>STL</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Markdown 相关资料</title>
+    <url>/2021/11/20/Markdown-%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>frp内网穿透</title>
+    <url>/2021/12/25/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
+    <content><![CDATA[<h1 id="frp内网穿透"><a href="#frp内网穿透" class="headerlink" title="frp内网穿透"></a>frp内网穿透</h1><h2 id="有公网-IP-的-Linux-服务器环境准备"><a href="#有公网-IP-的-Linux-服务器环境准备" class="headerlink" title="有公网 IP 的 Linux 服务器环境准备"></a>有公网 IP 的 Linux 服务器环境准备</h2><p>笔者购买了一年阿里云ECS，安装 CentOS8 环境，配置完成密码后，使用 FinalShell 软件远程 SSH 登录阿里云ECS。</p>
+<blockquote>
+<p>FinalShell SSH工具：<a href="http://www.hostbuf.com/t/988.html">http://www.hostbuf.com/t/988.html</a></p>
+</blockquote>
+<h2 id="下载并配置-frp"><a href="#下载并配置-frp" class="headerlink" title="下载并配置 frp"></a>下载并配置 frp</h2><p>从 GitHub 找到 <a href="https://github.com/fatedier/frp">frp</a> 项目，进入 Releases 页面，找到Linux 64位版本(给上面CentOS8 64位用)，右击–&gt;复制链接地址，在登录后的 FinalShell 中输入(可以先 cd 到自己想要存放的路径)：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;fatedier&#x2F;frp&#x2F;releases&#x2F;download&#x2F;v0.38.0&#x2F;frp_0.38.0_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
+<p>下载后解压，并进入解压的文件夹：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar zxvf frp_0.38.0_linux_amd64.tar.gz </span><br><span class="line"><span class="built_in">cd</span> frp_0.38.0_linux_amd64/</span><br></pre></td></tr></table></figure>
+<p>修改 frps_frps.ini：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">用 systemctl 自启动  frp 服务</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line"><span class="comment"># 创建 systemd 服务，是以 &quot;.service&quot; 为后缀的单元文件</span></span><br><span class="line">vim /lib/systemd/system/frps.service</span><br><span class="line"><span class="comment"># 在里面添加如下内容，仅 ExecStart 的路径需要修改</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=frps service</span><br><span class="line">After=network.target syslog.target</span><br><span class="line">Wants=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/home/frp/frps -c /home/frp/frps.ini</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target                                                                    </span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动服务可以使用命令</span></span><br><span class="line">systemctl start frps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使服务跟随系统自启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> frps</span><br></pre></td></tr></table></figure>
+<p>设置完成后重启系统 <code>reboot</code>，查看正在运行的进程</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps aux</span><br></pre></td></tr></table></figure>
+<p>按理可以找到 frp 进程：/home/frp/frps -c /home/frp/frps.ini</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>x86小主机整理</title>
+    <url>/2022/01/09/x86%E5%B0%8F%E4%B8%BB%E6%9C%BA%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<h1 id="x86小主机整理"><a href="#x86小主机整理" class="headerlink" title="x86小主机整理"></a>x86小主机整理</h1><blockquote>
+<p><a href="https://post.smzdm.com/p/avwdnqom/">联想1L小主机简单汇总</a></p>
+</blockquote>
+<h2 id="联想M710q"><a href="#联想M710q" class="headerlink" title="联想M710q"></a>联想M710q</h2><ul>
+<li>淘宝/咸鱼价格：</li>
+<li>USB-A * 2（正面），DP * 2（背面）</li>
+<li>官方 BIOS 支持第六、七代处理器，可以<strong>刷 BIOS 上第八、九代</strong>处理器，以及上如 qnct 这一类的<strong>测试版CPU</strong>（教程可上 chh）</li>
+<li>主板是 b250 芯片组</li>
+<li>铜制散热器</li>
+</ul>
+<h2 id="联想M720q"><a href="#联想M720q" class="headerlink" title="联想M720q"></a>联想M720q</h2><ul>
+<li><p>淘宝/咸鱼价格：￥800左右</p>
+</li>
+<li><p>USB-A + USB-C(3.1非全功能)（正面），DP * +HDMI（背面）</p>
+</li>
+<li><p>主板是 b360 芯片组</p>
+</li>
+<li><p>官方 BIOS 支持第六、七代处理器，可以<strong>刷 BIOS 上第八、九代</strong>处理器</p>
+</li>
+<li><p>带 PCI 扩展槽</p>
+</li>
+<li><p>单 M.2 插槽（仅配置一个）</p>
+<blockquote>
+<p>加装第二 M.2 槽：因为B360pcie通道受限，只能支持到sata协议的固态硬盘，无法支持nvme固态硬盘。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="联想M910q"><a href="#联想M910q" class="headerlink" title="联想M910q"></a>联想M910q</h2><ul>
+<li>淘宝/咸鱼价格：￥左右</li>
+<li>USB-A + USB-C(3.1非全功能)（正面），DP * +HDMI（背面）</li>
+<li>主板是 b360 芯片组</li>
+</ul>
+<p>M910q比M710q多了一个M.2的接口，其他都是一样的</p>
+<h2 id="联想M920q"><a href="#联想M920q" class="headerlink" title="联想M920q"></a>联想M920q</h2><ul>
+<li>淘宝/咸鱼价格：￥xx</li>
+<li>USB-A + USB-C(3.1非全功能)（正面），DP * +HDMI（背面）</li>
+<li>主板是 q370 芯片组</li>
+<li>官方 BIOS 支持第六、七代处理器，可以<strong>刷 BIOS 上第八、九代</strong>处理器，以及上如 qnct 这一类的<strong>测试版CPU</strong>（教程可上 chh），</li>
+<li>铜制散热器</li>
+<li>带 PCI 扩展槽，不可扩展显卡</li>
+<li>单 M.2 插槽（仅配置一个）</li>
+<li>相比 M720q 支持雷电3扩展，扩展成本在1000左右</li>
+</ul>
+<h2 id="联想M920x"><a href="#联想M920x" class="headerlink" title="联想M920x"></a>联想M920x</h2><ul>
+<li><p>淘宝/咸鱼价格：￥1200-1400</p>
+</li>
+<li><p>USB-A + USB-C(3.1非全功能)（正面），DP * +HDMI（背面）</p>
+</li>
+<li><p>主板是 q370 芯片组</p>
+</li>
+<li><p>官方 BIOS 支持第六、七代处理器，可以<strong>刷 BIOS 上第八、九代</strong>处理器</p>
+</li>
+<li><p>带 PCI 扩展槽，可扩展显卡或4口网卡</p>
+</li>
+<li><p>相比 M720q 支持雷电3扩展，扩展成本在1000左右</p>
+</li>
+<li><p>双 M.2 插槽</p>
+</li>
+</ul>
+<h2 id="联想M72"><a href="#联想M72" class="headerlink" title="联想M72"></a>联想M72</h2><ul>
+<li>2/3代 CPU</li>
+<li>H61主板</li>
+</ul>
+<h2 id="联想M73"><a href="#联想M73" class="headerlink" title="联想M73"></a>联想M73</h2><ul>
+<li>4代 CPU</li>
+<li>H81主板</li>
+</ul>
+<h2 id="配件选择"><a href="#配件选择" class="headerlink" title="配件选择"></a>配件选择</h2><ol>
+<li><p>CPU</p>
+<ul>
+<li><p>正常</p>
+<p>最推荐 i5-8600T，价格大概在1000左右，性能比 i5-8500T 和 i5-9500T的性能要好一些。</p>
+<p>i5-8600T：6C6T，2.3睿3.7G  核显：UHD630  三级绶存9M  ￥800+</p>
+<p>i5-8400T：6C6T，2.3睿3.7G  核显：UHD630  三级绶存9M  ￥787</p>
+<p>i5-8400：6C6T，2.3睿4.0G  核显：UHD630  三级绶存9M  内存2666  ￥804</p>
+<p>i3-9100：4C4T，3.6睿4.2G 核显：UHD630 三级绶存6M  内存2400  ￥635</p>
+<p>i3-8100：4C4T，3.6 核显：UHD630 三级绶存6M  内存2400  ￥605</p>
+<p>i3-8350K：4C4T，4.0 核显：UHD630 三级绶存8M  内存2400  ￥600</p>
+</li>
+<li><p>笔记本魔改U</p>
+<p>QNCT - 6C12T i7-8850H ES    2.4睿3.6G  全核2.9G  核显：UHD630  三级绶存9M   锁倍频  ￥480<br>QQLT - 6C12T i7-9850HK ES    2.4睿4.1G  全核3.8G  核显：UHD630  三级绶存12M  不锁倍频  ￥650<br>QQLS - 8C16T i9-8880H ES    2.1睿4.4G  全核3.9G  核显：UHD630  三级绶存16M  不锁倍频  ￥850<br>QTJ2 - 6C12T i7-10750H ES    2.4睿4.3G  全核4.0G  核显：UHD630  三级缓存12M  锁倍频 ￥620<br>QTJ1 - 8C16T I9-10980HK    2.1睿4.6G  全核4.1G  核显：UHD630  三级绶存16M  锁倍频 ￥899</p>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code> &gt; [酷睿八、九代魔改BGA QNCT（i7 8850H）、QQLT（i7 9850HK）、QQLS（i9 9980hk）简单测试测评跑分](http://www.zdzdm.com/p/116597)
+ &gt;
+ &gt; [89代魔改台式CPU QNVH QQLS QQLT QNCT QTJ1 1151针BGA转LGA CPU](https://www.taobao.com/list/item/625383750892.htm)</code></pre>
+<ol start="2">
+<li><p>网卡</p>
+<p>i350t4 在淘宝和咸鱼有很多山寨卡，要多留意。芯片上太大的字体以及电感这些东西是可以去判断的一些细节，具体可以看 chh 网友的一些帖子。 </p>
+</li>
+</ol>
+<blockquote>
+<p><a href="https://www.smzdm.com/tag/tm5p30n/">张大妈：什么值得买</a></p>
+<p><a href="https://www.chiphell.com/forum.php">chh：硬件论坛</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://post.smzdm.com/p/akxzg9me/">联想M710Q/M910Q最新魔改BIOS及刷改教程，789代部分10代及魔改U</a></p>
+<p><a href="https://post.smzdm.com/p/ammq2ggp/">联想m720q加装第二个m2插槽折腾记</a></p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>网址收藏</title>
+    <url>/2022/01/28/%E7%BD%91%E5%9D%80%E6%94%B6%E8%97%8F/</url>
+    <content><![CDATA[<h1 id="网址收藏"><a href="#网址收藏" class="headerlink" title="网址收藏"></a>网址收藏</h1><h2 id="Windows软件下载"><a href="#Windows软件下载" class="headerlink" title="Windows软件下载"></a>Windows软件下载</h2><p>FileCR：<a href="https://filecr.com/en/?id=94784667264">https://filecr.com/en/?id=94784667264</a></p>
+<h2 id="MAC软件下载"><a href="#MAC软件下载" class="headerlink" title="MAC软件下载"></a>MAC软件下载</h2><p>MacDownload：<a href="https://macdownload.org/">https://macdownload.org/</a></p>
+<h2 id="游戏下载"><a href="#游戏下载" class="headerlink" title="游戏下载"></a>游戏下载</h2><p>switch 游戏下载：<a href="https://switch520.com/">https://switch520.com/</a></p>
+<h2 id="壁纸下载"><a href="#壁纸下载" class="headerlink" title="壁纸下载"></a>壁纸下载</h2><p>pexels：<a href="https://www.pexels.com/zh-cn/">https://www.pexels.com/zh-cn/</a></p>
+<h2 id="综合导航"><a href="#综合导航" class="headerlink" title="综合导航"></a>综合导航</h2><p>搜网通：<a href="https://www.s5t.com/">https://www.s5t.com/</a></p>
+<p>好玩实验室：<a href="https://www.youappstore.com/">https://www.youappstore.com/</a></p>
+<h2 id="看剧网站"><a href="#看剧网站" class="headerlink" title="看剧网站"></a>看剧网站</h2><p>60+ 影视网址大全(持续更新中)</p>
+<p><a href="https://www.youappstore.com/user/1">好玩实验室</a> • 2021年7月13日 pm6:55 • <a href="https://www.youappstore.com/category/pc/pc-video">影音播放</a> • 阅读 19041</p>
+<ol>
+<li>两个BT：<a href="http://www.bttwo.com/">http://www.bttwo.com</a></li>
+<li>新版6v影院：<a href="https://www.66s.cc/">https://www.66s.cc</a></li>
+<li>哗嘀影视：<a href="https://www.bde4.com/">https://www.bde4.com</a></li>
+<li>我的电影网：<a href="http://www.wodedy.net/">http://www.wodedy.net</a></li>
+<li>七七看片：<a href="https://www.77kpp.com/">https://www.77kpp.com/</a></li>
+<li>草民电影：<a href="https://www.cmdy5.com/">https://www.cmdy5.com/</a></li>
+<li>私人官网：<a href="http://www.aishang118.cn/">http://www.aishang118.cn/</a></li>
+<li>电影盒子：h<a href="http://www.tv5box.com/">ttp://www.tv5box.com/</a></li>
+<li>94神马电影网：<a href="http://www.9rmb.com/">http://www.9rmb.com/</a></li>
+<li>好恐怖：h<a href="http://www.hkb123.com/">ttp://www.hkb123.com/</a></li>
+<li>西瓜电影：h<a href="https://www.xigua110.com/">ttps://www.xigua110.com/</a></li>
+<li>人人影视：h<a href="http://www.yyetss.com/">ttp://www.yyetss.com/</a></li>
+<li>速影TV：h<a href="https://suyingtv.com/">ttps://suyingtv.com/</a></li>
+<li>奈非影视：h<a href="https://www.nfmovies.com/">ttps://www.nfmovies.com/</a></li>
+<li>五杀电影院：h<a href="https://www.lol5s.com/">ttps://www.lol5s.com/</a></li>
+<li>蓝马影视：h<a href="https://www.lanmays.com/">ttps://www.lanmays.com/</a></li>
+<li>美鱼剧场：h<a href="http://www.hailiys.com/">ttp://www.hailiys.com/</a></li>
+<li>吼吼：h<a href="http://hoho.tv/">ttp://hoho.tv/</a></li>
+<li>钉子电影：h<a href="http://www.dingziyc.com/">ttp://www.dingziyc.com/</a></li>
+<li>葡萄影视：h<a href="https://www.putaoys.com/">ttps://www.putaoys.com/</a></li>
+<li>太初电影：h<a href="https://www.tcmove.com/">ttps://www.tcmove.com/</a></li>
+<li>完美看看：h<a href="https://www.wanmeikk.me/">ttps://www.wanmeikk.me/</a></li>
+<li>TV剧迷：h<a href="https://gimy.tv/">ttps://gimy.tv/</a></li>
+<li>NO视频：h<a href="http://www.novipnoad.com/">ttp://www.novipnoad.com/</a></li>
+<li>五号站：h<a href="http://www.wuhaozhan.net/">ttp://www.wuhaozhan.net</a></li>
+<li>91美剧：h<a href="https://91mjw.com/">ttps://91mjw.com/</a></li>
+<li>美剧鸟：h<a href="http://www.meijuniao.com/">ttp://www.meijuniao.com/</a></li>
+<li>日剧TV：h<a href="https://www.rijutv.com/">ttps://www.rijutv.com/</a></li>
+<li>韩剧集网：h<a href="https://www.juji.tv/">ttps://www.juji.tv/</a></li>
+<li>Zzzfun：h<a href="http://www.zzzfun.com/">ttp://www.zzzfun.com/</a></li>
+<li>妮可动漫：h<a href="http://www.nicotv.me/">ttp://www.nicotv.me/</a></li>
+<li>动漫岛：h<a href="http://www.dmd8.com/">ttp://www.dmd8.com/</a></li>
+<li>ADC电影网：h<a href="https://www.adcmove.com/">ttps://www.adcmove.com/</a></li>
+<li>青鸟影视：h<a href="https://www.qingniao.me/">ttps://www.qingniao.me/</a></li>
+<li>美剧天堂：h<a href="https://www.meijutt.tv/">ttps://www.meijutt.tv/</a></li>
+<li>lol电影天堂：h<a href="https://www.loldytt.com/">ttps://www.loldytt.com/</a></li>
+<li>1090影视：h<a href="http://1090ys2.com/">ttp://1090ys2.com/</a></li>
+<li>98播播网：ht<a href="http://98bbw.com/">tp://98bbw.com/</a></li>
+<li>爱看电影：ht<a href="http://akdy2019.com/">tp://akdy2019.com/</a></li>
+<li>电影盒子：ht<a href="http://www.tv8box.com/">tp://www.tv8box.com/</a></li>
+<li>真不卡映射：ht<a href="https://www.zhenbuka2.com/">tps://www.zhenbuka2.com/</a></li>
+<li>哆咪动漫网：h<a href="http://www.dmdm2020.com/">ttp://www.dmdm2020.com/</a></li>
+<li>嗨哆咪：ht<a href="http://hdmys.com/">tp://hdmys.com/</a></li>
+<li>嘀哩嘀哩：ht<a href="http://dilidili1.com/">tp://dilidili1.com/</a></li>
+<li>新飘花电影网： ht<a href="http://www.xpiaohua.com/">tp://www.xpiaohua.com/</a></li>
+<li>高清map4吧：ht<a href="http://www.mp4ba.cc/">tp://www.mp4ba.cc/</a></li>
+<li>555电影：ht<a href="https://www.o8tv.com/">tps://www.o8tv.com/</a></li>
+<li>大师兄影视: ht<a href="https://tv.ci/">tps://tv.ci/</a></li>
+<li>片库网：ht<a href="https://www.mypianku.net/">tps://www.mypianku.net/</a></li>
+<li>南柯电影网： ht<a href="http://www.nkdyw.com/">tp://www.nkdyw.com</a></li>
+<li>COKEMV影视： ht<a href="https://cokemv.cn/">tps://cokemv.cn</a></li>
+<li>回响影视： ht<a href="https://hxys.tv/">tps://hxys.tv</a></li>
+<li>达达兔： ht<a href="https://www.dadatuw.com/">tps://www.dadatuw.com</a></li>
+<li>电影先生： ht<a href="http://dianying.im/">tp://dianying.im</a></li>
+<li>不开VIP： ht<a href="https://bukaivip.com/">tps://bukaivip.com</a></li>
+<li>MINI4K迷客电影：ht<a href="https://www.mini4k.com/">tps://www.mini4k.com/</a></li>
+<li>蓝光网：ht<a href="http://www.languang.co/?btwaf=42303956">tp://www.languang.co/?btwaf=42303956</a></li>
+<li>音范丝：ht<a href="http://www.yinfans.me/">tp://www.yinfans.me/</a></li>
+<li>查片源：ht<a href="https://www.chapianyuan.com/">tps://www.chapianyuan.com/</a></li>
+<li>高清电台：ht<a href="https://gaoqing.fm/">tps://gaoqing.fm/</a></li>
+<li>中国高清网：ht<a href="http://gaoqing.la/">tp://gaoqing.la/</a></li>
+<li><a href="http://gaoqing.la/">高</a>清网：htt<a href="https://www.gaoqingw.com/">ps://www.gaoqingw.com</a></li>
+</ol>
+<p><strong>持续更新中……</strong></p>
+<h2 id="艺术资源网址"><a href="#艺术资源网址" class="headerlink" title="艺术资源网址"></a>艺术资源网址</h2><p>在线配音：<a href="https://www.6pian.cn/peiyin.html">https://www.6pian.cn/peiyin.html</a></p>
+]]></content>
   </entry>
 </search>

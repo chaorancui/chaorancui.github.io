@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Git 整理1. git 远程强制覆盖本地 &#x2F; git 本地强制覆盖远程 git 远程覆盖本地 远程分支名记得替换下，一般都是在dev 或者版本号上开发。 123git fetch --allgit reset --hard origin&#x2F;master git pull git fetch 只是下载远程的库的内容，不做任何的合并 git reset 把 HEAD 指向刚刚下载的最新的版本   第一">
+  <meta name="description" content="Git 整理git SSH 秘钥生成秘钥路径： 1234cd ~&#x2F;.ssh&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&gt;&gt;authorized_keys2  id_dsa       known_hostsconfig            id_dsa.pub 在 git bash 中输入命令，引号中内容为邮箱： 1ssh-keygen -t rsa -C &quot;cuichaoran@hu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git 整理">
 <meta property="og:url" content="http://example.com/2021/11/07/Git-%E6%95%B4%E7%90%86/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Git 整理1. git 远程强制覆盖本地 &#x2F; git 本地强制覆盖远程 git 远程覆盖本地 远程分支名记得替换下，一般都是在dev 或者版本号上开发。 123git fetch --allgit reset --hard origin&#x2F;master git pull git fetch 只是下载远程的库的内容，不做任何的合并 git reset 把 HEAD 指向刚刚下载的最新的版本   第一">
+<meta property="og:description" content="Git 整理git SSH 秘钥生成秘钥路径： 1234cd ~&#x2F;.ssh&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&gt;&gt;authorized_keys2  id_dsa       known_hostsconfig            id_dsa.pub 在 git bash 中输入命令，引号中内容为邮箱： 1ssh-keygen -t rsa -C &quot;cuichaoran@hu">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-07T06:57:50.000Z">
-<meta property="article:modified_time" content="2021-11-07T09:14:20.614Z">
+<meta property="article:modified_time" content="2022-01-16T08:42:44.166Z">
 <meta property="article:author" content="Chaoran Cui">
 <meta name="twitter:card" content="summary">
 
@@ -124,7 +124,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">5</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -182,10 +182,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-11-07 14:57:50 / 修改时间：17:14:20" itemprop="dateCreated datePublished" datetime="2021-11-07T14:57:50+08:00">2021-11-07</time>
+              <time title="创建时间：2021-11-07 14:57:50" itemprop="dateCreated datePublished" datetime="2021-11-07T14:57:50+08:00">2021-11-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-16 16:42:44" itemprop="dateModified" datetime="2022-01-16T16:42:44+08:00">2022-01-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -207,7 +213,136 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Git-整理"><a href="#Git-整理" class="headerlink" title="Git 整理"></a>Git 整理</h1><h2 id="1-git-远程强制覆盖本地-git-本地强制覆盖远程"><a href="#1-git-远程强制覆盖本地-git-本地强制覆盖远程" class="headerlink" title="1. git 远程强制覆盖本地 / git 本地强制覆盖远程"></a>1. git 远程强制覆盖本地 / git 本地强制覆盖远程</h2><ol>
+        <h1 id="Git-整理"><a href="#Git-整理" class="headerlink" title="Git 整理"></a>Git 整理</h1><h2 id="git-SSH-秘钥生成"><a href="#git-SSH-秘钥生成" class="headerlink" title="git SSH 秘钥生成"></a>git SSH 秘钥生成</h2><p>秘钥路径：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.ssh</span><br><span class="line">================&gt;&gt;</span><br><span class="line">authorized_keys2  id_dsa       known_hosts</span><br><span class="line">config            id_dsa.pub</span><br></pre></td></tr></table></figure>
+<p>在 git bash 中输入命令，引号中内容为邮箱：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;cuichaoran@huawei.com&quot;</span></span><br></pre></td></tr></table></figure>
+<p>该命令会在用户主目录（Windows：C:\Users\用户名\，Linux：~/）里生产 <code>.ssh</code> 文件夹，里面有 <code>id_rsa</code> 和 <code>id_rsa.pub</code> 两个文件，这两个文件就是 SSH Key 的秘钥对。其中，id_rsa 是私钥，不能泄露，id_rsa.pub 是公钥，可以告诉别人。</p>
+<p>拷贝 SSH 秘钥后要修改权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SSH 秘钥从 Windows 拷贝到 Linux后，文件权限会改变，导致告警，重新修改权限即可：</span><br><span class="line">chmod 600 id_rsa id_rsa.pub</span><br></pre></td></tr></table></figure>
+<p>原因是秘钥权限不能对其他用户开放，否则秘钥就会被忽略，用 SSH 访问时报如下警告，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">Permissions 0777 for &#39;liydsshkey&#39; are too open.</span><br><span class="line">It is required that your private key files are NOT accessible by others.</span><br><span class="line">This private key will be ignored.</span><br></pre></td></tr></table></figure>
+<p>Windows下秘钥默认权限：-rw-r–r–</p>
+<blockquote>
+<p>参考资料</p>
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5">服务器上的 Git - 生成 SSH 公钥</a></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>下面的命令输入的时候不需要输入 <code>&lt;</code> 和 <code>&gt;</code></p>
+<p>在克隆远程项目的时候，本地分支会自动与远程仓库建立追踪关系，可以使用默认的 origin 来替代远程仓库名，因此上文中的 &lt;仓库关联命名&gt; 常常写成 origin。若一个本地仓库关联了多个远程仓库，则需要根据实际情况选择 &lt;仓库关联命名&gt;。</p>
+</blockquote>
+<h2 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h2><p>git clone 只能 clone 远程库的 master 分支，无法 clone 所有分支。</p>
+<h2 id="git-pull操作"><a href="#git-pull操作" class="headerlink" title="git pull操作"></a>git pull操作</h2><p>git pull 命令用于从远程获取代码并合并本地的版本。git pull 其实是 <strong>git fetch</strong> 和 <strong>git merge</strong> 的合并。</p>
+<ul>
+<li><p>将远程指定分支拉取到本地<strong>指定</strong>分支上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull &lt;关联仓库命名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将远程指定分支拉取到本地<strong>当前</strong>分支上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull &lt;关联仓库命名&gt; &lt;远程分支名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>将与本地当前分支<strong>同名</strong>的远程分支拉取到本地<strong>当前</strong>分支上(需先关联远程分支，方法如下)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br><span class="line"></span><br><span class="line">// 将本地分支与远程同名分支相关联</span><br><span class="line">git push --set-upstream origin &lt;本地分支名&gt;</span><br><span class="line">// 简写方式：</span><br><span class="line">git push -u origin &lt;本地分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>在克隆远程项目的时候，本地分支会自动与远程仓库建立追踪关系，可以使用默认的origin来替代远程仓库名，<br>所以，我常用的命令就是 git pull origin &lt;远程仓库名&gt;，操作简单，安全可控。</p>
+</li>
+<li><p>将远程指定分支拉取到本地<strong>指定</strong>分支上（本地不存在的分支）:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch</span><br><span class="line">git checkout -b 本地分支名 origin/远程分支名</span><br></pre></td></tr></table></figure></li>
+<li><p>远端分支<strong>强制覆盖</strong>本地分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin &lt;远程分支名&gt;</span><br><span class="line">git reset --hard origin/&lt;远程分支名&gt;</span><br><span class="line"><span class="comment">#  或者使用下面的命令</span></span><br><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/&lt;远程分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>git fetch 只是下载远程的库的内容，不做任何的合并 git reset 把 HEAD 指向刚刚下载的最新的版本。 还可以在执行一次 git pull，也可以不用执行。</p>
+<p>第一个是：拉取所有更新，不同步；</p>
+<p>第二个是：本地代码同步线上最新版本(会覆盖本地所有与远程仓库上同名的文件)；</p>
+</li>
+</ul>
+<h2 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a>git push</h2><ul>
+<li><p>将本地当前分支推送到远程<strong>指定</strong>分支上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;关联仓库命名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>将本地当前分支推送到与本地当前分支<strong>同名</strong>的远程分支上（如果远程仓库没有这个分支，则会新建一个该分支）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;关联仓库命名&gt; &lt;本地分支名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>将本地当前分支推送到与本地当前分支<strong>同名</strong>的远程分支上(需先关联远程分支，方法方法如下)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br><span class="line"></span><br><span class="line">// 将本地分支与远程同名分支相关联</span><br><span class="line">git push --set-upstream origin &lt;本地分支名&gt;</span><br><span class="line">// 简写方式：</span><br><span class="line">git push -u origin &lt;本地分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>同样的，推荐使用第2种方式，git push origin &lt;远程同名分支名&gt;</p>
+</li>
+<li><p>本地<strong>强制覆盖</strong>远程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;关联仓库命名&gt; &lt;远程分支名&gt; --force</span><br></pre></td></tr></table></figure>
+<p>如 git 本地分支强制覆盖远程 master 分支：<code>git push origin master --force</code></p>
+</li>
+</ul>
+<blockquote>
+<p>注意：pull是远程在前本地在后，push相反</p>
+</blockquote>
+<h2 id="git-remote"><a href="#git-remote" class="headerlink" title="git remote"></a>git remote</h2><ul>
+<li><p>查看已关联的远程仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure></li>
+<li><p>添加一个远程仓库（输入的时候不需要输入 <code>&lt;</code> 和 <code>&gt;</code>）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add &lt;关联仓库命名&gt; &lt;关联仓库地址&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>取消本地目录下关联的远程库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote remove &lt;关联仓库命名&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h2><ul>
+<li><p>本地分支重命名（还没有推送到远程）</p>
+<p>如果对于分支不是当前分支，可以使用下面代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -m &lt;原分支名&gt; &lt;新分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>如果是当前分支，那么可以使用加上新名字：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -m &lt;新分支名&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>远程分支重命名（已经推送远程-假设本地分支和远程对应分支名称相同，且处于本地分支）</p>
+<p>a. 重命名远程分支对应的本地分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -m &lt;原分支名&gt; &lt;新分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>b. 删除远程分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --delete origin &lt;原分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>c. 上传新命名的本地分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;新分支名&gt;</span><br></pre></td></tr></table></figure>
+<p>d.把修改后的本地分支与远程分支关联</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch --set-upstream-to origin/&lt;新分支名&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="git-commit"><a href="#git-commit" class="headerlink" title="git commit"></a>git commit</h2><blockquote>
+<p>–amend 通过创建一个新的 commit 来替换当前分支的尖端。</p>
+</blockquote>
+<p>修改 commit message，「amend：修改、修正」</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
+<p>在弹出的 vim 编辑窗口中，最上方，修改 message 后，:wq 即可。</p>
+<blockquote>
+<p>参考网址</p>
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2">7.6 Git 工具 - 重写历史</a></p>
+</blockquote>
+<h2 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h2><p>git reset 命令用于回退版本，可以指定退回某一次提交的版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset [--soft | --mixed | --hard] [HEAD]</span><br></pre></td></tr></table></figure>
+<p><strong>–mixed</strong> 为默认，可以不用带该参数，用于重置暂存区的文件与上一次的提交(commit)保持一致，工作区文件内容保持不变。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">HEAD 说明：</span><br><span class="line">HEAD 表示当前版本</span><br><span class="line">HEAD^ 上一个版本</span><br><span class="line">HEAD^^ 上上一个版本</span><br><span class="line">HEAD^^^ 上上上一个版本</span><br><span class="line">以此类推...</span><br><span class="line"></span><br><span class="line">可以使用 ~ 数字表示</span><br><span class="line">HEAD~0 表示当前版本</span><br><span class="line">HEAD~1 上一个版本</span><br><span class="line">HEAD^2 上上一个版本</span><br><span class="line">HEAD^3 上上上一个版本</span><br><span class="line">以此类推...</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h2><p>rebase的作用简要概括为：可以对某一段线性提交历史进行编辑、删除、复制、粘贴；因此，合理使用rebase命令可以使我们的提交历史干净、简洁！</p>
+<p><strong>使用git rebase合并多次commit：</strong></p>
+<ul>
+<li><p>方法1：指名要合并的版本号区间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i  [startpoint]  [endpoint]</span><br></pre></td></tr></table></figure>
+<p>其中 <code>-i</code> 的意思是 <code>--interactive</code>，即弹出交互式的界面让用户编辑完成合并操作，<code>[startpoint] [endpoint]</code>则指定了一个编辑区间，如果不指定<code>[endpoint]</code>，则该区间的终点默认是当前分支 HEAD 所指向的 commit （注：该区间指定的是一个前开后闭的区间，<code>[startpoint]</code> <strong>本身不参与合并</strong>，可以把它当做一个坐标）。</p>
+</li>
+<li><p>方法2：从HEAD版本开始往过去数3个版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i HEAD~3 </span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<p>  在弹出的 vim 编辑窗口中，会列出要合并的 commit message，提交时间最早的列在上面，最晚的在下面，由于 squash 是要和前一个 commit 合并，因此<strong>最早的一个填 pick，比较晚的几个都填 squash</strong>，然后 <code>:wq</code> 即可。</p>
+<blockquote>
+<p>指令解释（交互编辑时使用）：</p>
+<p>pick：保留该commit（缩写:p）</p>
+<p>reword：保留该commit，但我需要修改该commit的注释（缩写:r）</p>
+<p>edit：保留该commit, 但我要停下来修改该提交(不仅仅修改注释)（缩写:e）</p>
+<p>squash：将该commit和前一个commit合并（缩写:s）</p>
+<p>fixup：将该commit和前一个commit合并，但我不要保留该提交的注释信息（缩写:f）</p>
+<p>exec：执行shell命令（缩写:x）</p>
+<p>drop：我要丢弃该commit（缩写:d）</p>
+</blockquote>
+<h2 id="git-远程强制覆盖本地-git-本地强制覆盖远程"><a href="#git-远程强制覆盖本地-git-本地强制覆盖远程" class="headerlink" title="git 远程强制覆盖本地 / git 本地强制覆盖远程"></a>git 远程强制覆盖本地 / git 本地强制覆盖远程</h2><ol>
 <li><p>git 远程覆盖本地</p>
 <p><font color=red>远程分支名记得替换下</font>，一般都是在dev 或者版本号上开发。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master </span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
@@ -241,7 +376,10 @@
     <a href="/2021/11/06/VScode%E7%BC%96%E5%86%99shell%E6%8F%92%E4%BB%B6/" rel="prev" title="VScode编写shell插件">
       <i class="fa fa-chevron-left"></i> VScode编写shell插件
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/20/Markdown-%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99/" rel="next" title="Markdown 相关资料">
+      Markdown 相关资料 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -300,7 +438,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-%E6%95%B4%E7%90%86"><span class="nav-text">Git 整理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-git-%E8%BF%9C%E7%A8%8B%E5%BC%BA%E5%88%B6%E8%A6%86%E7%9B%96%E6%9C%AC%E5%9C%B0-git-%E6%9C%AC%E5%9C%B0%E5%BC%BA%E5%88%B6%E8%A6%86%E7%9B%96%E8%BF%9C%E7%A8%8B"><span class="nav-text">1. git 远程强制覆盖本地 &#x2F; git 本地强制覆盖远程</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-%E6%95%B4%E7%90%86"><span class="nav-text">Git 整理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-SSH-%E7%A7%98%E9%92%A5%E7%94%9F%E6%88%90"><span class="nav-text">git SSH 秘钥生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-clone"><span class="nav-text">git clone</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-pull%E6%93%8D%E4%BD%9C"><span class="nav-text">git pull操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-push"><span class="nav-text">git push</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-remote"><span class="nav-text">git remote</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-branch"><span class="nav-text">git branch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-commit"><span class="nav-text">git commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-reset"><span class="nav-text">git reset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-rebase"><span class="nav-text">git rebase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-%E8%BF%9C%E7%A8%8B%E5%BC%BA%E5%88%B6%E8%A6%86%E7%9B%96%E6%9C%AC%E5%9C%B0-git-%E6%9C%AC%E5%9C%B0%E5%BC%BA%E5%88%B6%E8%A6%86%E7%9B%96%E8%BF%9C%E7%A8%8B"><span class="nav-text">git 远程强制覆盖本地 &#x2F; git 本地强制覆盖远程</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -314,7 +452,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -348,7 +486,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
